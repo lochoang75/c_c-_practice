@@ -14,38 +14,43 @@ Time::Time(int hour, int minute, int second)
 } // end Time constructor
 
 // set new Time value using universal time
-void Time::setTime(int h, int m, int s)
+Time &Time::setTime(int h, int m, int s)
 {
     setHour(h);
     setMinute(m);
     setSecond(s);
+
+    return *this; // enable casscading
 } // end function setTime
 
 // set hour value
-void Time::setHour(int h)
+Time &Time::setHour(int h)
 {
     if (h >= 0 && h < 24)
         hour = h;
     else 
         throw invalid_argument("hour must be 0 - 23");
+    return *this; //enable casscadin;
 } // end function setHour
 
 // set Minute value
-void Time::setMinute(int m)
+Time &Time::setMinute(int m)
 {
     if (m >=0 && m < 60)
         minute = m;
     else
         throw invalid_argument("minute must be 0 - 59");
+    return *this; // enable cascading
 } // end function set Minute
 
 // set Second value
-void Time::setSecond(int s)
+Time &Time::setSecond(int s)
 {
     if (s >= 0 && s < 60)
         second = s;
     else
         throw invalid_argument("second must be 0 - 59");
+    return *this; // enable cascading
 } // end fucntion set Second
 
 // return hour value

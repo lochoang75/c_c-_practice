@@ -1,4 +1,5 @@
 // Fig 9.1: Time.h
+// Cascading member function calls
 // Time class definition.
 // Member functions are defined in Time.cpp
 
@@ -13,10 +14,10 @@ public:
     explicit Time(int = 0, int = 0, int = 0); // default constructor
     
     // set functions
-    void setTime(int, int, int); // set hour, minute and second
-    void setHour(int); // set hour(after validation)
-    void setMinute(int); // set minute (after validation)
-    void setSecond(int); // set second (after validation)
+    Time &setTime(int, int, int); // set hour, minute and second
+    Time &setHour(int); // set hour(after validation)
+    Time &setMinute(int); // set minute (after validation)
+    Time &setSecond(int); // set second (after validation)
 
     // get functions
     unsigned int getHour() const; // return hour
