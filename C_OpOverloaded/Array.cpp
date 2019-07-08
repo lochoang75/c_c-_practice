@@ -36,3 +36,84 @@ size_t Array::getSize() const
 
 // overloaded assignment operator;
 // const return to avoid:(a1 = a2) = a3
+const Array& Array::operator=(const Array& right)
+{
+    if (&right != this) // avoid self-assignment
+    {
+        // for Array of different sizes, deallocate original
+        // left-side Array, then allocate new left-side Array
+        if (size != right.size)
+        {
+            delete[] ptr; // release space
+            size = right.size; // resize this object
+            ptr = new int[size]; // create space for Array copy
+        } // end inner if
+
+        for (size_t i = 0; i < size; ++i)
+            ptr[i] = right.ptr[i]; //copy array into object
+    } // end outer if
+    return *this; // enables x = y = z for example
+}// end function operator=
+
+
+// determine if two Arrays are equal and 
+// return true, otherwise return false
+bool Array::operator==(const Array& right) const
+{
+    if (size != right.size)
+        return false; // arrays of different number of elements
+
+    for (size_t i = 0; i < size; ++i)
+        if (ptr[i] != right.ptr[i])
+            return false; // Array contents are not equal
+
+    return true; // Array are equal
+} // end function operator==
+
+// overloaded subscript operator for non-const Arrays;
+// reference return creates a modifialble lvalue
+int& Array::operator[](int subscript)
+{
+    // check for subscript out-of-range error
+    if (subscript < 0 || subscript >= size)
+        throw out_of_range("Subscript out of range");
+    return ptr[subscript]; // reference return
+} // end function operator[]
+
+// overloaded subscript operator for const Arrays
+// const reference return creates an rvalue
+int Array::operator[](int subscript) const
+{
+    // check for subscript out-of-range error
+    if (subscript < 0 || subscript >= size)
+        throw out_of_range("Subscript out of range");
+    return ptr[subscript]; // return copy of this element
+}// end function operator[]
+
+// overloaded input operator for class Array;
+// inputs values for entire Array
+istream& operator>>(istream& input, Array& a)
+{
+    for (size_t i = 0; i < a.size; ++i)
+        input >> a.ptr[i];
+
+    return input; // enables cin >> x>> y;
+} // end function  operator >> for class array
+
+//overloaded output operator for class Array
+ostream& operator<<(ostream& output, const Array& a)
+{
+    // output private ptr-based array
+    for (size_t i = 0; i < a.size; ++i)
+    {
+        output << setw(12) << a.ptr[i];
+
+        if ((i + 1) % 4 == 0) // 4 nubmer per row of ouput
+            output << endl;
+    } // end for
+
+    if (a.size % 4 != 0) // end last line of output
+        output << endl;
+
+    return output; // enalbes cout << x<< y;
+} // end function operator <<

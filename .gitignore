@@ -1,0 +1,6 @@
+Debug/
+*.pdf
+*.vs
+*.exe
+*.vcxproj.*
+*.sln
