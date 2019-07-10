@@ -8,50 +8,12 @@ using namespace std;
 // constructor
 CommissionEmployee::CommissionEmployee(
     const string& first, const string& last, const string& ssn,
-    double sales, double rate)
+    double sales, double rate): Employee(first, last, ssn)
 {
-    firstName = first; // should validate
-    lastName = last; // should validate
-    socialSecurityNumber = ssn; // should validate
     setGrossSales(sales); // validate and store gross sales
     setCommissionRate(rate); // validate and store commission rate
 } // end CommissionEmployee constructor
 
-// set first name
-void CommissionEmployee::setFirstName(const string& first)
-{
-    firstName = first; // should validate
-} // end function setFirstName
-
-// return first name
-string CommissionEmployee::getFirstName() const
-{
-	return firstName;  
-} // end function getFirstName
-
-//  set last name
-void CommissionEmployee::setLastName(const string& last)
-{
-	lastName = last; // should validate
-} // end function set last name
-
-// return  last name
-string CommissionEmployee::getLastName() const
-{
-	return lastName;
-} // end functon get last name
-
-// set social security number
-void CommissionEmployee::setSocialSecurityNumber(const string& ssn)
-{
-	socialSecurityNumber = ssn; // should validate
-} // end function set social security number
-
-// return  social security number
-string CommissionEmployee::getSocialSecurityNumber() const
-{
-	return socialSecurityNumber;
-} // end function get social security number
 
 // set gross sales amount
 void CommissionEmployee::setGrossSales(double sales)
@@ -92,8 +54,8 @@ double CommissionEmployee::earnings() const
 // print CommissionEmployee object
 void CommissionEmployee::print() const
 {
-	cout << "comission employee: " << firstName << ' ' << lastName
-		<< "\nsocial security number: " << socialSecurityNumber
-		<< "\ngross sales: " << grossSales
-		<< "\ncommission rate" << commissionRate;
+	cout << "commission employee: ";
+	Employee::print(); //code reuse
+	cout << "\ngross sales: " << getGrossSales()
+		<< "; commission rate: " << getCommissionRate();
 } // end function print
